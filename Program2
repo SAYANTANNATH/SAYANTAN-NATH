@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabs Component</title>
+    <style>
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <ul id="tabs" onclick="changeTab(event)">
+        <li data-tab="tab1" class="active">Tab 1</li>
+        <li data-tab="tab2">Tab 2</li>
+        <li data-tab="tab3">Tab 3</li>
+    </ul>
+
+    <div id="tab1" class="tab-content active">
+        <h2>Content for Tab 1</h2>
+        <p>This is the content for Tab 1.</p>
+    </div>
+
+    <div id="tab2" class="tab-content">
+        <h2>Content for Tab 2</h2>
+        <p>This is the content for Tab 2.</p>
+    </div>
+
+    <div id="tab3" class="tab-content">
+        <h2>Content for Tab 3</h2>
+        <p>This is the content for Tab 3.</p>
+    </div>
+
+    <script>
+        function changeTab(event) {
+            // Check if a tab element was clicked
+            if (event.target.tagName === 'LI') {
+                var clickedTab = event.target;
+                
+                // Deactivate all tabs
+                var tabs = document.querySelectorAll('#tabs li');
+                tabs.forEach(function (tab) {
+                    tab.classList.remove('active');
+                });
+
+                // Hide all tab contents
+                var tabContents = document.querySelectorAll('.tab-content');
+                tabContents.forEach(function (tabContent) {
+                    tabContent.classList.remove('active');
+                });
+
+                // Activate the clicked tab
+                clickedTab.classList.add('active');
+
+                // Show the corresponding tab content
+                var tabId = clickedTab.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            }
+        }
+    </script>
+
+</body>
+</html>
